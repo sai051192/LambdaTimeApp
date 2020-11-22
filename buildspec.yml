@@ -8,7 +8,7 @@ phases:
       - npm install time
       - npm install -g https://artifactory.app.protego.io/cloudguard-serverless-plugin.tgz
       - export BUCKET=app2artifactucket
-      - cloudguard fsp add -C template.yaml --region us-east-1 --output template1.yaml
+      - cloudguard fsp add -t f98c1ea5-e3dd-4d2e-80de-a779d37c87e1:wyisonz8b44fsrmdscwp7sui -C template.yaml --region us-east-1 --output template1.yaml
       - aws cloudformation package --template-file template1.yaml --s3-bucket $BUCKET --output-template-file outputtemplate.yaml
       - 
 artifacts:
