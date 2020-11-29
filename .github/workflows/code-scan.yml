@@ -31,5 +31,5 @@ jobs:
               chmod u+x shiftleft
               export CHKP_CLOUDGUARD_ID=${{secrets.CG_SHIFTLEFT_ACCESSKEY}}
               export CHKP_CLOUDGUARD_SECRET=${{secrets.CG_SHIFTLEFT_PASSWORD}}
-              shiftleft code-scan -s .
+              ./shiftleft code-scan -s .
 
