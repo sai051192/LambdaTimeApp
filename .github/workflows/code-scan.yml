@@ -19,7 +19,7 @@ jobs:
               chmod u+x shiftleft
               export CHKP_CLOUDGUARD_ID=${{secrets.CG_SHIFTLEFT_ACCESSKEY}}
               export CHKP_CLOUDGUARD_SECRET=${{secrets.CG_SHIFTLEFT_PASSWORD}}
-              filename=`date +%M:%H-%d-%m-%y`output.log
+              filename=`date +%M-%H-%d-%m-%y`output.log
               echo "PATH=`pwd`/$filename" >> $GITHUB_ENV
               ./shiftleft code-scan -s . | tee $filename
               
