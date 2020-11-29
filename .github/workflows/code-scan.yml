@@ -1,7 +1,4 @@
-
-
 name: Shiftleft-code-scan
-
 on:
   push:
     branches: [ master ]
@@ -11,22 +8,19 @@ on:
 
 
 jobs:
-
   scan:
-
     runs-on: ubuntu-latest
-
- 
     steps:
-
       - uses: actions/checkout@v2
-
       - name: Check Point Shiftleft code scan
         run: |
               wget https://shiftleft-prod.s3.amazonaws.com/blades/shiftleft/bin/linux/amd64/0.0.24/shiftleft
               chmod u+x shiftleft
               export CHKP_CLOUDGUARD_ID=${{secrets.CG_SHIFTLEFT_ACCESSKEY}}
               export CHKP_CLOUDGUARD_SECRET=${{secrets.CG_SHIFTLEFT_PASSWORD}}
-              ./shiftleft code-scan -s . | tee "`date +%M:%H-%d-%m-%y`output.log"
-
-
+              filename=`date +%M:%H-%d-%m-%y`output.log
+              ./shiftleft code-scan -s . | tee $filename
+      - uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: $filename
