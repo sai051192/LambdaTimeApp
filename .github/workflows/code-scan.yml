@@ -11,6 +11,7 @@ jobs:
   scan:
     runs-on: ubuntu-latest
     steps:
+      
       - uses: actions/checkout@v2
       - name: Check Point Shiftleft code scan
         run: |
@@ -21,6 +22,11 @@ jobs:
               filename=`date +%M:%H-%d-%m-%y`output.log
               echo "PATH=`pwd`/$filename" >> $GITHUB_ENV
               ./shiftleft code-scan -s . | tee $filename
+              
+      - name: test path variable
+        run: |
+          echo $PATH
+          
       - uses: actions/upload-artifact@v2
         with:
           name: my-artifact
