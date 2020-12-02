@@ -1,4 +1,4 @@
-name: Shiftleft-code-scan
+name: Cloudguard Proact code-scan
 on:
   push:
   pull_request:
@@ -14,10 +14,10 @@ jobs:
       - uses: actions/checkout@v2
       - name: Check Point Shiftleft code scan
         run: |
-              wget https://shiftleft-prod.s3.amazonaws.com/blades/shiftleft/bin/linux/amd64/0.0.24/shiftleft
-              chmod u+x shiftleft
-              export CHKP_CLOUDGUARD_ID=${{secrets.CG_SHIFTLEFT_ACCESSKEY}}
-              export CHKP_CLOUDGUARD_SECRET=${{secrets.CG_SHIFTLEFT_PASSWORD}}
-              filename=`date +%M-%H-%d-%m-%y`output.log
-              echo "PATH=`pwd`/$filename" >> $GITHUB_ENV
-              ./shiftleft code-scan -s . 
+              apt install awscli
+              echo "[default]" > ~/.aws/credentials
+              echo "aws_access_key_id=${{secrets.AWS_ACCESS_ID}}" > ~/.aws/credentials
+              echo "aws_secret_access_key=${{secrets.AWS_ACCESS_KEY}}" > ~/.aws/credentials
+              export AWS_REGION=us_east_1
+              npm install -g https://artifactory.app.protego.io/cloudguard-serverless-plugin.tgz
+              cloudguard proact -m template.yaml -t ${{secrets.CG_SHIFTLEFT_ACCESSKEY}}:${{secrets.CG_SHIFTLEFT_PASSWORD}}
