@@ -14,7 +14,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Check Point Shiftleft code scan
         run: |
-              apt install awscli
+              apt-get update
+              apt-get install awscli
               echo "[default]" > ~/.aws/credentials
               echo "aws_access_key_id=${{secrets.AWS_ACCESS_ID}}" > ~/.aws/credentials
               echo "aws_secret_access_key=${{secrets.AWS_ACCESS_KEY}}" > ~/.aws/credentials
