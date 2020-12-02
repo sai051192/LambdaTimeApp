@@ -21,13 +21,4 @@ jobs:
               export CHKP_CLOUDGUARD_SECRET=${{secrets.CG_SHIFTLEFT_PASSWORD}}
               filename=`date +%M-%H-%d-%m-%y`output.log
               echo "PATH=`pwd`/$filename" >> $GITHUB_ENV
-              ./shiftleft code-scan -s . | tee $filename
-              
-      - name: test path variable
-        run: |
-          echo $PATH
-          
-      - uses: actions/upload-artifact@v2
-        with:
-          name: my-artifact
-          path: ${{ env.PATH }}
+              ./shiftleft code-scan -s . 
