@@ -19,7 +19,7 @@ jobs:
             aws-secret-access-key: ${{ secrets.AWS_ACCESS_KEY }}
             aws-region: us-east-1
       
-      - name: Check Point Shiftleft code scan
+      - name: Check Point Cloudguard Proact code scan
         run: |
               sudo npm install -g https://artifactory.app.protego.io/cloudguard-serverless-plugin.tgz
               cloudguard proact -m template.yaml -t ${{secrets.CG_SHIFTLEFT_ACCESSKEY}}:${{secrets.CG_SHIFTLEFT_PASSWORD}}
