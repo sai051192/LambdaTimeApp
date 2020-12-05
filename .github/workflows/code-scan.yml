@@ -22,4 +22,4 @@ jobs:
       - name: Check Point Cloudguard Proact code scan
         run: |
               sudo npm install -g https://artifactory.app.protego.io/cloudguard-serverless-plugin.tgz
-              cloudguard proact -m template.yaml -t ${{secrets.CG_SHIFTLEFT_ACCESSKEY}}:${{secrets.CG_SHIFTLEFT_PASSWORD}}
+              cloudguard proact -m template.yaml -t ${{secrets.CLOUDGUARD_ID}}:${{secrets.CLOUDGUARD_SECRET}}
