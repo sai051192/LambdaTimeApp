@@ -12,13 +12,14 @@ jobs:
     steps:
       
       - uses: actions/checkout@v2
+       
+      - uses: aws-actions/configure-aws-credentials@v1
+        with:
+            aws-access-key-id: ${{ secrets.AWS_ACCESS_ID }}
+            aws-secret-access-key: ${{ secrets.AWS_ACCESS_KEY }}
+            aws-region: us-east-1
+      
       - name: Check Point Shiftleft code scan
         run: |
-              apt-get update
-              apt-get install awscli
-              echo "[default]" > ~/.aws/credentials
-              echo "aws_access_key_id=${{secrets.AWS_ACCESS_ID}}" > ~/.aws/credentials
-              echo "aws_secret_access_key=${{secrets.AWS_ACCESS_KEY}}" > ~/.aws/credentials
-              export AWS_REGION=us_east_1
               npm install -g https://artifactory.app.protego.io/cloudguard-serverless-plugin.tgz
               cloudguard proact -m template.yaml -t ${{secrets.CG_SHIFTLEFT_ACCESSKEY}}:${{secrets.CG_SHIFTLEFT_PASSWORD}}
