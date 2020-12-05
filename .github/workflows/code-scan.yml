@@ -21,6 +21,5 @@ jobs:
       
       - name: Check Point Shiftleft code scan
         run: |
-              chmod 777 /usr/local/lib/node_modules
-              npm install -g https://artifactory.app.protego.io/cloudguard-serverless-plugin.tgz
+              sudo npm install -g https://artifactory.app.protego.io/cloudguard-serverless-plugin.tgz
               cloudguard proact -m template.yaml -t ${{secrets.CG_SHIFTLEFT_ACCESSKEY}}:${{secrets.CG_SHIFTLEFT_PASSWORD}}
