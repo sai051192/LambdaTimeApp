@@ -23,3 +23,6 @@ jobs:
         run: |
               sudo npm install -g https://artifactory.app.protego.io/cloudguard-serverless-plugin.tgz
               cloudguard proact -m template.yaml -t ${{secrets.CLOUDGUARD_ID}}:${{secrets.CLOUDGUARD_SECRET}}
+              
+      - name: Uploading Scan report to S3
+        run: aws s3 cp file:////home/runner/work/pipeline2/pipeline2/cloudguard_output/CloudGuardScanReport.html s3://proact-scan-reports/`date +"%y"`/`date +"%m"`/`date +"%d"`/`date +"%H%M%S"`report.html
